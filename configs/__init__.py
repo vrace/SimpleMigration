@@ -3,6 +3,7 @@
 
 from .logging_config import *
 from .path_config import PathConfig
+from .migration_db_config import MigrationDBConfig
 
 logger = logging.getLogger(__name__)
 
