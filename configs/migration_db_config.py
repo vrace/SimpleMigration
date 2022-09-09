@@ -6,8 +6,8 @@ from sqlalchemy import create_engine
 
 class MigrationDBConfig:
 
-    url = "postgresql://postgres:postgres@localhost:5432/postgres"
+    def __init__(self):
+        self.url = "postgresql://postgres:postgres@localhost:5432/postgres"
 
-    @staticmethod
-    def connect():
-        return create_engine(MigrationDBConfig.url)
+    def connect(self):
+        return create_engine(self.url)

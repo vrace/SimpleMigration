@@ -3,8 +3,10 @@
 
 import sys
 
+import configs
 from migration_application import MigrationApplication
 
 if __name__ == "__main__":
-    app = MigrationApplication()
+    cfg = configs.init_configs()
+    app = MigrationApplication(cfg)
     sys.exit(app.main() or 0)

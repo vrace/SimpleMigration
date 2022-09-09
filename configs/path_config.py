@@ -6,18 +6,16 @@ import os
 
 class PathConfig:
 
-    data_in = "data_in"
-    data_out = "data_out"
-    res = "res"
+    def __init__(self):
+        self.data_in = "data_in"
+        self.data_out = "data_out"
+        self.res = "res"
 
-    @staticmethod
-    def data_in_file(filename):
-        return os.path.join(PathConfig.data_in, filename)
+    def data_in_file(self, filename):
+        return os.path.join(self.data_in, filename)
 
-    @staticmethod
-    def data_out_file(filename):
-        return os.path.join(PathConfig.data_out, filename)
+    def data_out_file(self, filename):
+        return os.path.join(self.data_out, filename)
 
-    @staticmethod
-    def res_file(filename):
-        return os.path.join(PathConfig.res, filename)
+    def res_file(self, filename):
+        return os.path.join(self.res, filename)
