@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from .basic_landing_task import BasicLandingTask
+
+
 def collect_landing_tasks(cfg):
     return []
 
