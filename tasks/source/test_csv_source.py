@@ -6,7 +6,7 @@ from unittest import TestCase
 
 import pandas as pd
 
-from tasks.csv_source import CsvSource
+from .csv_source import CsvSource
 
 
 class TestCsvSource(TestCase):
