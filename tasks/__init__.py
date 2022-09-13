@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from .basic_landing_task import BasicLandingTask
+from .source import CsvSource
 
 
 def collect_landing_tasks(cfg):
-    return []
+    return [
+        BasicLandingTask(cfg, CsvSource("person.csv"))
+    ]
 
 
 def collect_staging_tasks(cfg):
