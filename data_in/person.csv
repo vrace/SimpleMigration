@@ -1,6 +1,6 @@
-id,name,age,gender
-1,John,20,M
-2,Marry,18,F
-3,Lucas,57,M
-4,Ben,37,M
-5,Ada,22,F
+id,name,age,gender,pet_1,pet_2,pet_3
+1,John,20,M,1,,
+2,Marry,18,F,2,3,
+3,Lucas,57,M,4,,
+4,Ben,37,M,5,6,7
+5,Ada,22,F,,,

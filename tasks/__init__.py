@@ -7,7 +7,8 @@ from .source import CsvSource
 
 def collect_landing_tasks(cfg):
     return [
-        BasicLandingTask(cfg, CsvSource("person.csv"))
+        BasicLandingTask(cfg, CsvSource("person.csv")),
+        BasicLandingTask(cfg, CsvSource("pet.csv")),
     ]
 
 
