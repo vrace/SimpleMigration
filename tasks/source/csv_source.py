@@ -15,6 +15,6 @@ class CsvSource:
         data_filename = cfg.path.data_in_file(self.filename)
         return pd.read_csv(data_filename, dtype=str, na_filter=False, chunksize=1000)
 
-    def get_module_name(self):
-        module_name, _ = os.path.splitext(self.filename)
-        return module_name
+    def get_table_name(self):
+        table_name, _ = os.path.splitext(self.filename)
+        return table_name

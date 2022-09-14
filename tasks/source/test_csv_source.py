@@ -37,6 +37,6 @@ class TestCsvSource(TestCase):
         self.assertListEqual(df["column_a"].to_list(), ["1", "2", "3"])
         self.assertListEqual(df["column_b"].to_list(), ["a", "", "c"])
 
-    def test_get_module_name(self):
+    def test_get_table_name(self):
         source = CsvSource("sample_data.csv")
-        self.assertEqual(source.get_module_name(), "sample_data")
+        self.assertEqual(source.get_table_name(), "sample_data")

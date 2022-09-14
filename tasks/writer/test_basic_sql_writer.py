@@ -16,4 +16,4 @@ class TestBasicSqlWriter(TestCase):
         db_cfg = TestBasicSqlWriter.DummyDBConfig()
         writer = BasicSqlWriter(db_cfg)
 
-        self.assertRaises(NotImplementedError, writer.write, df="dummy", module_name="dummy", if_exists="dummy")
+        self.assertRaises(NotImplementedError, writer.write, df="dummy", table_name="dummy", if_exists="dummy")

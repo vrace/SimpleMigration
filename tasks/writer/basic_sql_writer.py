@@ -6,6 +6,6 @@ class BasicSqlWriter:
     def __init__(self, db_cfg):
         self.db_cfg = db_cfg
 
-    def write(self, df, module_name, if_exists):
+    def write(self, df, table_name, if_exists):
         conn = self.db_cfg.connect()
-        df.to_sql(module_name, conn, if_exists=if_exists, index=False)
+        df.to_sql(table_name, conn, if_exists=if_exists, index=False)

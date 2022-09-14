@@ -45,7 +45,7 @@ class TestBasicLandingTask(TestCase):
                       "c,3\n"
                 return pd.read_csv(StringIO(csv), dtype=str, na_filter=False, chunksize=2)
 
-            def get_module_name(self):
+            def get_table_name(self):
                 return "example"
 
         class DummyWriter:
@@ -53,8 +53,8 @@ class TestBasicLandingTask(TestCase):
                 self.it = 0
                 self.ut = ut
 
-            def write(self, df, module_name, if_exists):
-                self.ut.assertEqual(module_name, "example")
+            def write(self, df, table_name, if_exists):
+                self.ut.assertEqual(table_name, "example")
                 if self.it == 0:
                     self.ut.assertEqual(if_exists, "replace")
                     self.ut.assertListEqual(df["column_a"].to_list(), ["a", "b"])
