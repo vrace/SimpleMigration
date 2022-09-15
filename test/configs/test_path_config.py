@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 
-from .path_config import PathConfig
+from src.configs.path_config import PathConfig
 
 
 class PathConfigTest(TestCase):

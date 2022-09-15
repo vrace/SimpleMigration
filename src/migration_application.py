@@ -4,7 +4,7 @@
 import logging
 import traceback
 
-from tasks import collect_landing_tasks, collect_staging_tasks, collect_consumption_tasks, collect_misc_tasks
+from .tasks import collect_landing_tasks, collect_staging_tasks, collect_consumption_tasks, collect_misc_tasks
 
 logger = logging.getLogger(__name__)
 

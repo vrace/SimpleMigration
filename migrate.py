@@ -3,8 +3,7 @@
 
 import sys
 
-import configs
-from migration_application import MigrationApplication
+from src import configs, MigrationApplication
 
 if __name__ == "__main__":
     cfg = configs.init_configs()

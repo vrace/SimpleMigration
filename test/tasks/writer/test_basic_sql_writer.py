@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 
-from tasks.writer import BasicSqlWriter
+from src.tasks.writer import BasicSqlWriter
 
 
 class TestBasicSqlWriter(TestCase):

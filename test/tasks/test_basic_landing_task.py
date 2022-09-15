@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 from io import StringIO
 from unittest import TestCase
 
 import pandas as pd
 
-from tasks.basic_landing_task import BasicLandingTask
-from tasks.writer import BasicSqlWriter
+from src.tasks.basic_landing_task import BasicLandingTask
+from src.tasks.writer import BasicSqlWriter
 
 
 class TestBasicLandingTask(TestCase):

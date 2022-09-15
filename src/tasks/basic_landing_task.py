@@ -5,7 +5,7 @@ import logging
 
 import pandas as pd
 
-from tasks.writer import BasicSqlWriter
+from .writer import BasicSqlWriter
 
 
 class BasicLandingTask:
