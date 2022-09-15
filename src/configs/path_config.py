@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+import logging
 import os
 
 
 class PathConfig:
 
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
         self.data_in = "data_in"
         self.data_out = "data_out"
         self.res = "res"
@@ -19,3 +20,11 @@ class PathConfig:
 
     def res_file(self, filename):
         return os.path.join(self.res, filename)
+
+    def res_text(self, filename):
+        try:
+            with open(self.res_file(filename)) as fp:
+                return fp.read()
+        except BaseException as exc:
+            self.logger.error(f"Error loading resource {filename}")
+            raise exc

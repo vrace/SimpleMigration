@@ -7,21 +7,14 @@ from unittest import TestCase
 import pandas as pd
 
 from src.tasks.source import CsvSource
+from test.utils import TestConfigs
 
 
 class TestCsvSource(TestCase):
 
     def test_open(self):
-        class DummyPathConfig:
-            def data_in_file(self, csv):
-                return StringIO(csv)
-
-        class DummyConfig:
-            def __init__(self, path):
-                self.path = path
-
-        path_cfg = DummyPathConfig()
-        cfg = DummyConfig(path_cfg)
+        cfg = TestConfigs()
+        cfg.path.data_in_file = lambda x: StringIO(x)
 
         csv = "column_a,column_b\n" \
               "1,a\n" \
