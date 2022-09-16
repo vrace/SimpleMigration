@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class BasicSqlWriter:
+from .basic_writer import BasicWriter
 
-    def __init__(self, db_cfg):
-        self.db_cfg = db_cfg
 
-    def write(self, df, table_name, if_exists):
-        conn = self.db_cfg.connect()
-        df.to_sql(table_name, conn, if_exists=if_exists, index=False)
+class BasicSqlWriter(BasicWriter):
+
+    def __init__(self, cfg, table_name, db_cfg=None):
+        self.cfg = cfg
+        self.table_name = table_name
+        self.conn = (db_cfg or cfg.db).connect()
+
+    def write(self, df, if_exists):
+        df.to_sql(self.table_name, self.conn, if_exists=if_exists, index=False)

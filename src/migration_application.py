@@ -6,26 +6,25 @@ import traceback
 
 from .tasks import collect_landing_tasks, collect_staging_tasks, collect_consumption_tasks, collect_misc_tasks
 
-logger = logging.getLogger(__name__)
-
 
 class MigrationApplication:
 
     def __init__(self, cfg):
+        self.logger = logging.getLogger(__name__)
         self.cfg = cfg
 
     def main(self):
-        logger.info("Migration started")
+        self.logger.info("Migration started")
         try:
             self.exec_landing_tasks()
             self.exec_staging_tasks()
             self.exec_consumption_tasks()
             self.exec_misc_tasks()
-            logger.info("Migration completed")
+            self.logger.info("Migration completed")
             return 0
         except BaseException as exc:
-            logger.error(f"Migration aborted: {exc}")
-            logger.debug(f"{traceback.format_exc()}")
+            self.logger.error(f"Migration aborted: {exc}")
+            self.logger.debug(f"{traceback.format_exc()}")
             return 1
 
     def exec_landing_tasks(self):
@@ -46,16 +45,16 @@ class MigrationApplication:
 
     def exec_tasks_in_batch(self, tasks, tasks_desc):
         if not tasks:
-            logger.warning(f"No {tasks_desc} tasks")
+            self.logger.warning(f"No {tasks_desc} tasks")
             return
-        logger.info(f"Executing {tasks_desc} tasks")
+        self.logger.info(f"Executing {tasks_desc} tasks")
         has_error = False
         for task in tasks:
             try:
                 task.execute()
             except BaseException as exc:
-                logger.error(f"Problem executing {tasks_desc} task: {exc}")
-                logger.debug(f"{traceback.format_exc()}")
+                self.logger.error(f"Problem executing {tasks_desc} task: {exc}")
+                self.logger.debug(f"{traceback.format_exc()}")
                 has_error = True
         if has_error:
             raise RuntimeError(f"Execute {tasks_desc} tasks are not fully completed")

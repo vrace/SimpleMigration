@@ -2,18 +2,21 @@
 # -*- coding: utf-8 -*-
 
 from .basic_landing_task import BasicLandingTask
-from .source import CsvSource
+from .basic_staging_task import BasicStagingTask
+from .basic_task import BasicTask
 
 
 def collect_landing_tasks(cfg):
     return [
-        BasicLandingTask(cfg, CsvSource("person.csv")),
-        BasicLandingTask(cfg, CsvSource("pet.csv")),
+        BasicLandingTask(cfg, "person"),
+        BasicLandingTask(cfg, "pet"),
     ]
 
 
 def collect_staging_tasks(cfg):
-    return []
+    return [
+        BasicStagingTask(cfg, "person_pets"),
+    ]
 
 
 def collect_consumption_tasks(cfg):

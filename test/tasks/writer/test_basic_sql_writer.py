@@ -4,15 +4,15 @@
 from unittest import TestCase
 
 from src.tasks.writer import BasicSqlWriter
-from test.utils import TestDBConfig, TestDataFrame
+from test.utils import TestDataFrame, TestConfigs
 
 
 class TestBasicSqlWriter(TestCase):
 
     def test_write(self):
-        db_cfg = TestDBConfig()
-        db_cfg.connect = lambda: "dummy conn"
-        writer = BasicSqlWriter(db_cfg)
+        cfg = TestConfigs()
+        cfg.db.connect = lambda: "dummy conn"
+        writer = BasicSqlWriter(cfg, "dummy table")
 
         def verify_to_sql(table_name, conn, if_exists, index):
             self.assertEqual(table_name, "dummy table")
@@ -23,4 +23,4 @@ class TestBasicSqlWriter(TestCase):
         df = TestDataFrame()
         df.to_sql = verify_to_sql
 
-        writer.write(df, "dummy table", "replace")
+        writer.write(df, "replace")
