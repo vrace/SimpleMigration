@@ -8,20 +8,19 @@ from .basic_task import BasicTask
 
 def collect_landing_tasks(cfg):
     return [
-        BasicLandingTask(cfg, "person"),
-        BasicLandingTask(cfg, "pet"),
     ]
 
 
 def collect_staging_tasks(cfg):
     return [
-        BasicStagingTask(cfg, "person_pets"),
     ]
 
 
 def collect_consumption_tasks(cfg):
-    return []
+    return [
+    ]
 
 
 def collect_misc_tasks(cfg):
-    return []
+    return [
+    ]
