@@ -4,3 +4,4 @@
 class TestDataFrame:
     def __init__(self):
         self.to_sql = None
+        self.to_csv = None
