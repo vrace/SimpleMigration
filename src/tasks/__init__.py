@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from .basic_consumption_task import BasicConsumptionTask
 from .basic_landing_task import BasicLandingTask
 from .basic_staging_task import BasicStagingTask
 from .basic_task import BasicTask

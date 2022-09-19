@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 
 venv/
+data_out/*.csv
 
 .idea/
 .DS_Store

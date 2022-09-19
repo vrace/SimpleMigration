@@ -5,7 +5,12 @@ import sys
 
 from src import configs, MigrationApplication
 
-if __name__ == "__main__":
+
+def main():
     cfg = configs.init_configs()
     app = MigrationApplication(cfg)
-    sys.exit(app.main() or 0)
+    return app.main() or 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
