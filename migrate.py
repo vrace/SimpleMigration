@@ -3,12 +3,13 @@
 
 import sys
 
-from src import configs, MigrationApplication
+from src import configs, MigrationApplicationSelector
 
 
 def main():
     cfg = configs.init_configs()
-    app = MigrationApplication(cfg)
+    selector = MigrationApplicationSelector(cfg)
+    app = selector.select_by_argv(sys.argv[1:])
     return app.main() or 0
 
 
