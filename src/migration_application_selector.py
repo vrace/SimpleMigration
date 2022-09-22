@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from .migration_application import MigrationApplication
-
+from .migration_execute_landing_application import MigrationExecuteLandingApplication
 
 class MigrationApplicationSelector:
 
@@ -15,5 +15,8 @@ class MigrationApplicationSelector:
 
         name = argv[0]
         args = argv[1:]
+
+        if name == "land":
+            return MigrationExecuteLandingApplication(self.cfg, args)
 
         raise ValueError(f"unable to select application '{name}'")

@@ -20,3 +20,9 @@ class BasicConsumptionTask(BasicTask):
 
     def create_writer(self):
         return BasicCsvWriter(self.cfg, self.consumption_name)
+
+    def execute_begin(self):
+        self.logger.info(f"Consuming '{self.consumption_name}'")
+
+    def execute_end(self, num_rows):
+        self.logger.debug(f"...{num_rows} rows")
