@@ -14,16 +14,15 @@ class BasicConsumptionTask(BasicTask):
         super().__init__(consumption_name)
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
-        self.consumption_name = consumption_name
 
     def create_reader(self):
-        return BasicSqlReader(self.cfg, f"{self.consumption_name}_consumption")
+        return BasicSqlReader(self.cfg, f"{self.name}_consumption")
 
     def create_writer(self):
-        return BasicCsvWriter(self.cfg, self.consumption_name)
+        return BasicCsvWriter(self.cfg, self.name)
 
     def execute_begin(self):
-        self.logger.info(f"Consuming '{self.consumption_name}'")
+        self.logger.info(f"Consuming '{self.name}'")
 
     def execute_end(self, num_rows):
         self.logger.debug(f"...{num_rows} rows")

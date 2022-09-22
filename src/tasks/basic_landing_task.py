@@ -14,16 +14,15 @@ class BasicLandingTask(BasicTask):
         super().__init__(table_name)
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
-        self.table_name = table_name
 
     def create_reader(self):
-        return BasicCsvReader(self.cfg, self.table_name)
+        return BasicCsvReader(self.cfg, self.name)
 
     def create_writer(self):
-        return BasicSqlWriter(self.cfg, self.table_name)
+        return BasicSqlWriter(self.cfg, self.name)
 
     def execute_begin(self):
-        self.logger.info(f"Landing '{self.table_name}'")
+        self.logger.info(f"Landing '{self.name}'")
 
     def execute_end(self, num_rows):
         self.logger.debug(f"...{num_rows} rows")
