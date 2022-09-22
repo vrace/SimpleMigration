@@ -11,6 +11,7 @@ from .writer import BasicSqlWriter
 class BasicStagingTask(BasicTask):
 
     def __init__(self, cfg, staging_name):
+        super().__init__(staging_name)
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
         self.staging_name = staging_name

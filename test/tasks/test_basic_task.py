@@ -46,7 +46,7 @@ class TestBasicTask(TestCase):
         writer = BasicSqlWriter(cfg, "example")
         writer.write = verify_writer_write
 
-        task = BasicTask()
+        task = BasicTask("task")
         task.create_reader = lambda: reader
         task.create_writer = lambda: writer
 

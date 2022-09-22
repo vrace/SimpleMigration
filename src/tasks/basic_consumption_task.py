@@ -11,6 +11,7 @@ from .writer import BasicCsvWriter
 class BasicConsumptionTask(BasicTask):
 
     def __init__(self, cfg, consumption_name):
+        super().__init__(consumption_name)
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
         self.consumption_name = consumption_name

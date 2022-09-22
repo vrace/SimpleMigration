@@ -3,6 +3,9 @@
 
 class BasicTask:
 
+    def __init__(self, name):
+        self.name = name
+
     def create_reader(self):
         raise NotImplementedError()
 

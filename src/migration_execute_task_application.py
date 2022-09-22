@@ -4,18 +4,19 @@
 import logging
 import traceback
 
-from src.tasks import collect_landing_tasks
+from src.tasks import collect_landing_tasks, collect_staging_tasks, collect_consumption_tasks
 
 
-class MigrationExecuteLandingApplication:
+class MigrationExecuteTaskApplication:
 
-    def __init__(self, cfg, names):
+    def __init__(self, cfg, task_type, task_names):
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
-        self.names = names
+        self.task_type = task_type
+        self.task_names = task_names
 
     def main(self):
-        self.logger.info("Migration execute landing started")
+        self.logger.info(f"Migration execute {self.task_type} started")
         tasks = self.collect_tasks()
         num_errors = self.execute_tasks(tasks)
         if num_errors:
@@ -26,11 +27,17 @@ class MigrationExecuteLandingApplication:
         return 0
 
     def collect_tasks(self):
-        tasks = [x for x in collect_landing_tasks(self.cfg) if x.table_name in self.names]
-        found = [x.table_name for x in tasks]
-        missing = [x for x in self.names if x not in found]
+        collectors = {
+            "landing": collect_landing_tasks,
+            "staging": collect_staging_tasks,
+            "consumption": collect_consumption_tasks,
+        }
+        collect_fn = collectors[self.task_type]
+        tasks = [x for x in collect_fn(self.cfg) if x.name in self.task_names]
+        found = [x.name for x in tasks]
+        missing = [x for x in self.task_names if x not in found]
         if missing:
-            self.logger.warning("Not all landing tasks are collected")
+            self.logger.warning("Not all tasks are collected")
             for x in missing:
                 self.logger.warning(f"...{x}")
         return tasks
@@ -44,7 +51,7 @@ class MigrationExecuteLandingApplication:
             try:
                 task.execute()
             except BaseException as exc:
-                self.logger.error(f"Problem executing landing '{task.table_name}': {exc}")
+                self.logger.error(f"Problem executing {self.task_type} '{task.name}': {exc}")
                 self.logger.debug(f"{traceback.format_exc()}")
                 num_errors += 1
         return num_errors

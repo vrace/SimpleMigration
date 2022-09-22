@@ -11,6 +11,7 @@ from .writer import BasicSqlWriter
 class BasicLandingTask(BasicTask):
 
     def __init__(self, cfg, table_name):
+        super().__init__(table_name)
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
         self.table_name = table_name

@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from .migration_application import MigrationApplication
-from .migration_execute_landing_application import MigrationExecuteLandingApplication
+from .migration_execute_task_application import MigrationExecuteTaskApplication
+
 
 class MigrationApplicationSelector:
 
@@ -16,7 +17,13 @@ class MigrationApplicationSelector:
         name = argv[0]
         args = argv[1:]
 
+        if name == "migrate":
+            return MigrationApplication(self.cfg)
         if name == "land":
-            return MigrationExecuteLandingApplication(self.cfg, args)
+            return MigrationExecuteTaskApplication(self.cfg, "landing", args)
+        if name == "stage":
+            return MigrationExecuteTaskApplication(self.cfg, "staging", args)
+        if name == "consume":
+            return MigrationExecuteTaskApplication(self.cfg, "consumption", args)
 
         raise ValueError(f"unable to select application '{name}'")

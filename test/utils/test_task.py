@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class TestLandingTask:
+class TestTask:
 
-    def __init__(self, cfg, table_name, raise_exec_err=False):
+    def __init__(self, cfg, name, raise_exec_err=False):
         self.cfg = cfg
-        self.table_name = table_name
+        self.name = name
         self.executed = False
         self.raise_exec_err = raise_exec_err
 
