@@ -3,6 +3,7 @@
 
 from .basic_consumption_task import BasicConsumptionTask
 from .basic_landing_task import BasicLandingTask
+from .basic_misc_task import BasicMiscTask
 from .basic_staging_task import BasicStagingTask
 from .basic_task import BasicTask
 
