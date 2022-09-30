@@ -52,7 +52,7 @@ class TestMigrationExecuteTaskApplication(TestCase):
         self.assertTrue(task_ghi.executed)
 
     @patch("src.migration_execute_task_application.collect_landing_tasks")
-    def test_collect_landing_tasks(self, mock_collect_landing_tasks):
+    def test_collect_tasks_landing(self, mock_collect_landing_tasks):
         cfg = TestConfigs()
         task_abc = TestTask(cfg, "abc")
         task_def = TestTask(cfg, "def")
@@ -66,7 +66,7 @@ class TestMigrationExecuteTaskApplication(TestCase):
         self.assertListEqual(tasks, [task_def])
 
     @patch("src.migration_execute_task_application.collect_staging_tasks")
-    def test_collect_staging_tasks(self, mock_collect_staging_tasks):
+    def test_collect_tasks_staging(self, mock_collect_staging_tasks):
         cfg = TestConfigs()
         task_abc = TestTask(cfg, "abc")
         task_def = TestTask(cfg, "def")
@@ -80,7 +80,7 @@ class TestMigrationExecuteTaskApplication(TestCase):
         self.assertListEqual(tasks, [task_abc])
 
     @patch("src.migration_execute_task_application.collect_consumption_tasks")
-    def test_collect_consumption_tasks(self, mock_collect_consumption_tasks):
+    def test_collect_tasks_consumption(self, mock_collect_consumption_tasks):
         cfg = TestConfigs()
         task_abc = TestTask(cfg, "abc")
         task_def = TestTask(cfg, "def")
@@ -94,7 +94,7 @@ class TestMigrationExecuteTaskApplication(TestCase):
         self.assertListEqual(tasks, [task_ghi])
 
     @patch("src.migration_execute_task_application.collect_misc_tasks")
-    def test_collect_misc_tasks(self, mock_collect_misc_tasks):
+    def test_collect_tasks_misc(self, mock_collect_misc_tasks):
         cfg = TestConfigs()
         task_abc = TestTask(cfg, "abc")
         task_def = TestTask(cfg, "def")
@@ -106,3 +106,17 @@ class TestMigrationExecuteTaskApplication(TestCase):
 
         mock_collect_misc_tasks.assert_called_with(cfg)
         self.assertListEqual(tasks, [task_abc, task_def])
+
+    @patch("src.migration_execute_task_application.collect_landing_tasks")
+    def test_collect_tasks_without_names(self, mock_collect_landing_tasks):
+        cfg = TestConfigs()
+        task_abc = TestTask(cfg, "abc")
+        task_def = TestTask(cfg, "def")
+        task_ghi = TestTask(cfg, "ghi")
+        mock_collect_landing_tasks.return_value = [task_abc, task_def, task_ghi]
+
+        app = MigrationExecuteTaskApplication(cfg, "landing", [])
+        tasks = app.collect_tasks()
+
+        mock_collect_landing_tasks.assert_called_with(cfg)
+        self.assertListEqual(tasks, [task_abc, task_def, task_ghi])

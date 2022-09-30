@@ -34,6 +34,8 @@ class MigrationExecuteTaskApplication:
             "misc": collect_misc_tasks,
         }
         collect_fn = collectors[self.task_type]
+        if not self.task_names:
+            return collect_fn(self.cfg)
         tasks = [x for x in collect_fn(self.cfg) if x.name in self.task_names]
         found = [x.name for x in tasks]
         missing = [x for x in self.task_names if x not in found]
