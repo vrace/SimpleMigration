@@ -23,7 +23,7 @@ class BasicSqlReaderChunks:
         xs = rs.fetchone()
         num_chunks = (int(xs["num_rows"]) + self.chunk_size - 1) // self.chunk_size
         rs.close()
-        return num_chunks
+        return max(1, num_chunks)
 
     def fetch_chunk(self, conn, chunk_index):
         chunk_query = f"select * from ({self.query}) m limit {self.chunk_size} offset {self.chunk_size * chunk_index}"

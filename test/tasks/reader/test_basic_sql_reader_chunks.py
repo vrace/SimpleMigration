@@ -24,6 +24,20 @@ class TestBasicSqlReaderChunks(TestCase):
         chunks = BasicSqlReaderChunks("dummy", "example", 2)
         self.assertEqual(chunks.fetch_num_chunks(conn), 4)
 
+    def test_fetch_num_chunks_with_zero_rows(self):
+        def verify_execute(query):
+            self.assertEqual(query, "select count(1) num_rows from (example) m")
+            rs = TestResultSet()
+            rs.fetchone = lambda: {"num_rows": 0}
+            rs.close = lambda: None
+            return rs
+
+        conn = TestConnection()
+        conn.execute = verify_execute
+
+        chunks = BasicSqlReaderChunks("dummy", "example", 2)
+        self.assertEqual(chunks.fetch_num_chunks(conn), 1)
+
     @patch("pandas.read_sql")
     def test_fetch_chunk(self, mock_read_sql):
         chunks = BasicSqlReaderChunks("dummy", "example", 2)
