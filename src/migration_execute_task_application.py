@@ -4,7 +4,7 @@
 import logging
 import traceback
 
-from src.tasks import collect_landing_tasks, collect_staging_tasks, collect_consumption_tasks
+from .tasks import collect_landing_tasks, collect_staging_tasks, collect_consumption_tasks, collect_misc_tasks
 
 
 class MigrationExecuteTaskApplication:
@@ -31,6 +31,7 @@ class MigrationExecuteTaskApplication:
             "landing": collect_landing_tasks,
             "staging": collect_staging_tasks,
             "consumption": collect_consumption_tasks,
+            "misc": collect_misc_tasks,
         }
         collect_fn = collectors[self.task_type]
         tasks = [x for x in collect_fn(self.cfg) if x.name in self.task_names]

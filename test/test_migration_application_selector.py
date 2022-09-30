@@ -41,3 +41,8 @@ class TestMigrationApplicationSelector(TestCase):
         self.assertEqual(type(app), MigrationExecuteTaskApplication)
         self.assertEqual(app.task_type, "consumption")
         self.assertEqual(app.task_names, ["mno", "pqr"])
+
+        app = selector.select_by_argv(["misc", "stu", "vwx"])
+        self.assertEqual(type(app), MigrationExecuteTaskApplication)
+        self.assertEqual(app.task_type, "misc")
+        self.assertEqual(app.task_names, ["stu", "vwx"])

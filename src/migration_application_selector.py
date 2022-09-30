@@ -25,5 +25,7 @@ class MigrationApplicationSelector:
             return MigrationExecuteTaskApplication(self.cfg, "staging", args)
         if name == "consume":
             return MigrationExecuteTaskApplication(self.cfg, "consumption", args)
+        if name == "misc":
+            return MigrationExecuteTaskApplication(self.cfg, "misc", args)
 
         raise ValueError(f"unable to select application '{name}'")
