@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
 from io import StringIO
 from unittest import TestCase
 
@@ -33,3 +34,17 @@ class TestBasicCsvReader(TestCase):
 
         self.assertListEqual(df["column_a"].to_list(), ["1", "2", "3"])
         self.assertListEqual(df["column_b"].to_list(), ["a", "", "c"])
+
+    def test_locate_csv_file(self):
+        cfg = TestConfigs()
+        cfg.path.data_in_file = lambda x: os.path.join("data_in", x)
+        cfg.path.res_file = lambda x: os.path.join("res", x)
+
+        reader = BasicCsvReader(cfg, "example", origin="data_in")
+        self.assertEqual(reader.locate_csv_file(), "data_in/example.csv")
+
+        reader = BasicCsvReader(cfg, "example", origin="res")
+        self.assertEqual(reader.locate_csv_file(), "res/example.csv")
+
+        reader = BasicCsvReader(cfg, "example", origin="blah")
+        self.assertRaises(ValueError, reader.locate_csv_file)

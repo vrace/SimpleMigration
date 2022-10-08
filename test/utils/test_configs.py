@@ -16,5 +16,5 @@ class TestPathConfig:
     def __init__(self):
         self.data_in_file = None
         self.data_out_file = None
-        self.res_name = None
+        self.res_file = None
         self.res_text = None

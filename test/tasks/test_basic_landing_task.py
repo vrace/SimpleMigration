@@ -17,6 +17,15 @@ class TestBasicLandingTask(TestCase):
         self.assertEqual(type(reader), BasicCsvReader)
         self.assertEqual(reader.cfg, "cfg")
         self.assertEqual(reader.csv_name, "example")
+        self.assertEqual(reader.origin, "data_in")
+
+    def test_create_reader_with_origin_res(self):
+        task = BasicLandingTask("cfg", "example", origin="res")
+        reader = task.create_reader()
+        self.assertEqual(type(reader), BasicCsvReader)
+        self.assertEqual(reader.cfg, "cfg")
+        self.assertEqual(reader.csv_name, "example")
+        self.assertEqual(reader.origin, "res")
 
     def test_create_writer(self):
         cfg = TestConfigs()

@@ -10,13 +10,14 @@ from .writer import BasicSqlWriter
 
 class BasicLandingTask(BasicTask):
 
-    def __init__(self, cfg, table_name):
+    def __init__(self, cfg, table_name, origin="data_in"):
         super().__init__(table_name)
         self.logger = logging.getLogger(__name__)
         self.cfg = cfg
+        self.origin = origin
 
     def create_reader(self):
-        return BasicCsvReader(self.cfg, self.name)
+        return BasicCsvReader(self.cfg, self.name, origin=self.origin)
 
     def create_writer(self):
         return BasicSqlWriter(self.cfg, self.name)

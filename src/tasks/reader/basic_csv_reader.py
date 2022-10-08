@@ -8,11 +8,20 @@ from .basic_reader import BasicReader
 
 class BasicCsvReader(BasicReader):
 
-    def __init__(self, cfg, csv_name, chunk_size=1000):
+    def __init__(self, cfg, csv_name, chunk_size=1000, origin="data_in"):
         self.cfg = cfg
         self.csv_name = csv_name
         self.chunk_size = chunk_size
+        self.origin = origin
 
     def read(self):
-        csv_file = self.cfg.path.data_in_file(f"{self.csv_name}.csv")
+        csv_file = self.locate_csv_file()
         return pd.read_csv(csv_file, dtype=str, na_filter=False, chunksize=self.chunk_size)
+
+    def locate_csv_file(self):
+        csv_filename = f"{self.csv_name}.csv"
+        if self.origin == "data_in":
+            return self.cfg.path.data_in_file(csv_filename)
+        if self.origin == "res":
+            return self.cfg.path.res_file(csv_filename)
+        raise ValueError("origin can only be 'data_in' or 'res'")
