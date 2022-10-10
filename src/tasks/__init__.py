@@ -6,6 +6,7 @@ from .basic_landing_task import BasicLandingTask
 from .basic_misc_task import BasicMiscTask
 from .basic_staging_task import BasicStagingTask
 from .basic_task import BasicTask
+from .basic_template_task import BasicTemplateTask
 
 
 def collect_landing_tasks(cfg):
