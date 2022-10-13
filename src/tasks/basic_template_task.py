@@ -16,7 +16,7 @@ class BasicTemplateTask(BasicMiscTask):
         return f"{self.name}.template"
 
     def template_args(self):
-        raise {}
+        return {}
 
     def render_output_name(self):
         return self.name
