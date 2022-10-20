@@ -12,7 +12,7 @@ class PathConfig:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.data_in = ConfigParser.parse("$DATA_IN:data_in")
-        self.data_out = ConfigParser.parse("$DATA_IN:data_out")
+        self.data_out = ConfigParser.parse("$DATA_OUT:data_out")
         self.res = "res"
 
     def data_in_file(self, filename):
