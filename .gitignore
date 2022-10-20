@@ -4,6 +4,7 @@ __pycache__/
 venv/
 data_out/*
 utils/deployment/*.tar.gz
+utils/deployment/*.zip
 
 .idea/
 .DS_Store
