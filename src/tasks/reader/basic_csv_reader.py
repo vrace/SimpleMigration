@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import pandas as pd
+from contextlib import contextmanager
 
+from .basic_csv_reader_chunks import BasicCsvReaderChunks
 from .basic_reader import BasicReader
 
 
@@ -14,9 +15,13 @@ class BasicCsvReader(BasicReader):
         self.chunk_size = chunk_size
         self.origin = origin
 
+    @contextmanager
     def read(self):
-        csv_file = self.locate_csv_file()
-        return pd.read_csv(csv_file, dtype=str, na_filter=False, chunksize=self.chunk_size)
+        try:
+            csv_file = self.locate_csv_file()
+            yield BasicCsvReaderChunks(csv_file, self.chunk_size)
+        finally:
+            pass
 
     def locate_csv_file(self):
         csv_filename = f"{self.csv_name}.csv"
