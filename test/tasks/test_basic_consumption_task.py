@@ -4,7 +4,7 @@
 from unittest import TestCase
 
 from src.tasks.basic_consumption_task import BasicConsumptionTask
-from src.tasks.reader import BasicSqlReader
+from src.tasks.reader import PSQLReader
 from test.utils import TestConfigs
 
 
@@ -14,6 +14,6 @@ class TestBasicConsumptionTask(TestCase):
         cfg = TestConfigs()
         task = BasicConsumptionTask(cfg, "example")
         reader = task.create_reader()
-        self.assertEqual(type(reader), BasicSqlReader)
+        self.assertEqual(type(reader), PSQLReader)
         self.assertEqual(reader.cfg, cfg)
         self.assertEqual(reader.query_name, "example_consumption")

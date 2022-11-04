@@ -4,7 +4,7 @@
 import logging
 
 from .basic_task import BasicTask
-from .reader import BasicSqlReader
+from .reader import PSQLReader
 from .writer import BasicCsvWriter
 
 
@@ -16,7 +16,7 @@ class BasicConsumptionTask(BasicTask):
         self.cfg = cfg
 
     def create_reader(self):
-        return BasicSqlReader(self.cfg, f"{self.name}_consumption")
+        return PSQLReader(self.cfg, f"{self.name}_consumption")
 
     def create_writer(self):
         return BasicCsvWriter(self.cfg, self.name)

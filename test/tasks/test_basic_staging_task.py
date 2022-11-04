@@ -4,7 +4,7 @@
 from unittest import TestCase
 
 from src.tasks import BasicStagingTask
-from src.tasks.reader import BasicSqlReader
+from src.tasks.reader import PSQLReader
 from src.tasks.writer import BasicSqlWriter
 from test.utils import TestConfigs
 
@@ -16,7 +16,7 @@ class TestBasicStagingTask(TestCase):
         cfg.db.connect = lambda: "conn"
         task = BasicStagingTask(cfg, "example")
         reader = task.create_reader()
-        self.assertEqual(type(reader), BasicSqlReader)
+        self.assertEqual(type(reader), PSQLReader)
         self.assertEqual(reader.cfg, cfg)
         self.assertEqual(reader.query_name, "example_staging")
 

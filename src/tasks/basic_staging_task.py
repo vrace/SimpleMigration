@@ -4,7 +4,7 @@
 import logging
 
 from .basic_task import BasicTask
-from .reader import BasicSqlReader
+from .reader import PSQLReader
 from .writer import BasicSqlWriter
 
 
@@ -16,7 +16,7 @@ class BasicStagingTask(BasicTask):
         self.cfg = cfg
 
     def create_reader(self):
-        return BasicSqlReader(self.cfg, f"{self.name}_staging")
+        return PSQLReader(self.cfg, f"{self.name}_staging")
 
     def create_writer(self):
         return BasicSqlWriter(self.cfg, f"{self.name}_staging")
