@@ -4,3 +4,4 @@
 from .basic_csv_writer import BasicCsvWriter
 from .basic_sql_writer import BasicSqlWriter
 from .basic_writer import BasicWriter
+from .psql_writer import PSQLWriter

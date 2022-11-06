@@ -5,7 +5,7 @@ from unittest import TestCase
 
 from src.tasks import BasicLandingTask
 from src.tasks.reader import BasicCsvReader
-from src.tasks.writer import BasicSqlWriter
+from src.tasks.writer import PSQLWriter
 from test.utils import TestConfigs
 
 
@@ -32,6 +32,6 @@ class TestBasicLandingTask(TestCase):
         cfg.db.connect = lambda: "conn"
         task = BasicLandingTask(cfg, "example")
         writer = task.create_writer()
-        self.assertEqual(type(writer), BasicSqlWriter)
+        self.assertEqual(type(writer), PSQLWriter)
         self.assertEqual(writer.cfg, cfg)
         self.assertEqual(writer.table_name, "example")

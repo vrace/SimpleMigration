@@ -5,7 +5,7 @@ import logging
 
 from .basic_task import BasicTask
 from .reader import BasicCsvReader
-from .writer import BasicSqlWriter
+from .writer import PSQLWriter
 
 
 class BasicLandingTask(BasicTask):
@@ -20,7 +20,7 @@ class BasicLandingTask(BasicTask):
         return BasicCsvReader(self.cfg, self.name, origin=self.origin)
 
     def create_writer(self):
-        return BasicSqlWriter(self.cfg, self.name)
+        return PSQLWriter(self.cfg, self.name)
 
     def execute_begin(self):
         self.logger.info(f"Landing '{self.name}'")
