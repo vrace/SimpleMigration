@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 from src.tasks.writer import BasicSqlWriter
 from test.utils import TestDataFrame, TestConfigs
@@ -14,13 +15,8 @@ class TestBasicSqlWriter(TestCase):
         cfg.db.connect = lambda: "dummy conn"
         writer = BasicSqlWriter(cfg, "dummy table")
 
-        def verify_to_sql(table_name, conn, if_exists, index):
-            self.assertEqual(table_name, "dummy table")
-            self.assertEqual(conn, "dummy conn")
-            self.assertEqual(if_exists, "replace")
-            self.assertFalse(index)
-
         df = TestDataFrame()
-        df.to_sql = verify_to_sql
+        df.to_sql = MagicMock()
 
         writer.write(df, "replace")
+        df.to_sql.assert_called_with("dummy table", "dummy conn", if_exists="replace", index=False)

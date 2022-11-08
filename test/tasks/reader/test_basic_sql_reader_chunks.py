@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from src.tasks.reader import BasicSqlReaderChunks
 from test.utils import TestConnection, TestResultSet
@@ -11,32 +11,28 @@ from test.utils import TestConnection, TestResultSet
 class TestBasicSqlReaderChunks(TestCase):
 
     def test_fetch_num_chunks(self):
-        def verify_execute(query):
-            self.assertEqual(query, "select count(1) num_rows from (example) m")
-            rs = TestResultSet()
-            rs.fetchone = lambda: {"num_rows": 7}
-            rs.close = lambda: None
-            return rs
+        rs = TestResultSet()
+        rs.fetchone = lambda: {"num_rows": 7}
+        rs.close = lambda: None
 
         conn = TestConnection()
-        conn.execute = verify_execute
+        conn.execute = MagicMock(return_value=rs)
 
         chunks = BasicSqlReaderChunks("dummy", "example", 2)
         self.assertEqual(chunks.fetch_num_chunks(conn), 4)
+        conn.execute.assert_called_with("select count(1) num_rows from (example) m")
 
     def test_fetch_num_chunks_with_zero_rows(self):
-        def verify_execute(query):
-            self.assertEqual(query, "select count(1) num_rows from (example) m")
-            rs = TestResultSet()
-            rs.fetchone = lambda: {"num_rows": 0}
-            rs.close = lambda: None
-            return rs
+        rs = TestResultSet()
+        rs.fetchone = lambda: {"num_rows": 0}
+        rs.close = lambda: None
 
         conn = TestConnection()
-        conn.execute = verify_execute
+        conn.execute = MagicMock(return_value=rs)
 
         chunks = BasicSqlReaderChunks("dummy", "example", 2)
         self.assertEqual(chunks.fetch_num_chunks(conn), 1)
+        conn.execute.assert_called_with("select count(1) num_rows from (example) m")
 
     @patch("pandas.read_sql")
     def test_fetch_chunk(self, mock_read_sql):

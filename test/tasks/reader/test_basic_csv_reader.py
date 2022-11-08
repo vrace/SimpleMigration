@@ -4,6 +4,7 @@
 import os
 from io import StringIO
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 import pandas as pd
 
@@ -19,12 +20,8 @@ class TestBasicCsvReader(TestCase):
               "2,\n" \
               "3,c\n"
 
-        def verify_data_in_file(csv_file):
-            self.assertEqual(csv_file, "example.csv")
-            return StringIO(csv)
-
         cfg = TestConfigs()
-        cfg.path.data_in_file = verify_data_in_file
+        cfg.path.data_in_file = MagicMock(return_value=StringIO(csv))
 
         reader = BasicCsvReader(cfg, "example")
         with reader.read() as chunks:
@@ -34,6 +31,7 @@ class TestBasicCsvReader(TestCase):
 
         self.assertListEqual(df["column_a"].to_list(), ["1", "2", "3"])
         self.assertListEqual(df["column_b"].to_list(), ["a", "", "c"])
+        cfg.path.data_in_file.assert_called_with("example.csv")
 
     def test_locate_csv_file(self):
         cfg = TestConfigs()
