@@ -11,7 +11,7 @@ class PSQLWriter(BasicWriter):
 
     def __init__(self, cfg, table_name, db_cfg=None):
         self.cfg = cfg
-        self.table_name = table_name
+        self.table_name = table_name.lower()
         self.conn = (db_cfg or cfg.db).connect()
 
     def write(self, df, if_exists):

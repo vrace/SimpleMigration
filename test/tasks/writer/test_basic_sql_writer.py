@@ -13,7 +13,7 @@ class TestBasicSqlWriter(TestCase):
     def test_write(self):
         cfg = TestConfigs()
         cfg.db.connect = lambda: "dummy conn"
-        writer = BasicSqlWriter(cfg, "dummy table")
+        writer = BasicSqlWriter(cfg, "DUMMY TABLE")
 
         df = TestDataFrame()
         df.to_sql = MagicMock()
