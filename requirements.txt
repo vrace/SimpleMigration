@@ -1,4 +1,4 @@
-sqlalchemy
+sqlalchemy<2.0
 psycopg2-binary
 pandas
 jinja2
